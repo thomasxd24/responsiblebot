@@ -1,0 +1,17 @@
+{
+  "name": "LittleBrother",
+  "version": "1.0.0",
+  "description": "",
+  "main": "startup.js",
+  "dependencies": {
+    "discord.js": "^11.2.1",
+    "enmap": "^0.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
