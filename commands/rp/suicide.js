@@ -1,13 +1,21 @@
-exports.run = async (client, message, args) => {
+const { Command } = require('discord.js-commando');
 
-    message.delete().catch(O_o=>{});
-      message.channel.send({embed: {
-  color: 3447003,
-  title: "```* "+message.author.username+" took his own life...```"
-}})
+module.exports = class KillCommand extends Command {
+    constructor(client) {
+        super(client, {
+            name: 'suicide',
+            group: 'rp',
+            memberName: 'suicide',
+            description: 'Suicide yourself.',
+            examples: ['kill']
+        });
+    }
+
+    run(msg) {
+        msg.delete().catch(O_o=>{});
+          msg.channel.send({embed: {
+      color: 3447003,
+      title: "```* "+msg.author.username+" took his own life...```"
+    }});
+    }
 };
-
-exports.help = {
-  name:"suicide"
-}
- 
