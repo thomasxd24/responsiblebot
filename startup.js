@@ -28,11 +28,14 @@ fs.readdir("./commands/", (err, files) => {
 
 bot.on('ready',()=>{
   console.log('Bot is ready!');
-  console.log(bot.commands);
   bot.relationRequest = new Enmap({name: "relationRequest",persistent: true});
   bot.relation = new Enmap({name: "relation",persistent: true});
+  bot.muted = new Enmap({name: "muted",persistent: true});
+  bot.offences = new Enmap({name: "offences",persistent: true});
   console.log("Loaded relationRequest");
   console.log("Loaded relation");
+  console.log("Loaded muted");
+  console.log("Loaded offences");
   bot.user.setGame(`with BigBrother.`);
   var anti_spam = require("./anti-spam.js");
   anti_spam(bot, {

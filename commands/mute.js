@@ -1,8 +1,8 @@
 exports.run = async (client, message, args) => {
-
+// Timed mute
 
 };
 
 exports.help = {
-  name:"kick"
+  name:"mute"
 }
