@@ -1,13 +1,22 @@
-exports.run = async (client, message, args) => {
+const { Command } = require('discord.js-commando');
 
-    let member = message.mentions.users.first().username;
-    message.delete().catch(O_o=>{});
-      message.channel.send({embed: {
-  color: 3447003,
-  title: "```* "+message.author.username+" killed "+member+"...```"
-}})
+module.exports = class ExcitedCommand extends Command {
+    constructor(client) {
+        super(client, {
+            name: 'kill',
+            group: 'rp',
+            memberName: 'kill',
+            description: 'Kill someone.',
+            examples: ['kill']
+        });
+    }
+
+    run(message) {
+      let member = message.mentions.users.first().username;
+      message.delete().catch(O_o=>{});
+        message.channel.send({embed: {
+    color: 3447003,
+    title: "```* "+message.author.username+" killed "+member+"...```"
+  }});
+    }
 };
-
-exports.help = {
-  name:"kill"
-}

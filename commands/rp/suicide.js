@@ -1,13 +1,13 @@
 const { Command } = require('discord.js-commando');
 
-module.exports = class KillCommand extends Command {
+module.exports = class SuicideCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'suicide',
             group: 'rp',
             memberName: 'suicide',
             description: 'Suicide yourself.',
-            examples: ['kill']
+            examples: ['suicide']
         });
     }
 
