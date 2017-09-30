@@ -1,4 +1,5 @@
-module.exports = class pattedCommand extends Command {
+const { Command } = require('discord.js-commando');
+module.exports = class PatCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'pat',

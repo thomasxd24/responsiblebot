@@ -1,11 +1,12 @@
+const { Command } = require('discord.js-commando');
 module.exports = class KissCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'kill',
+            name: 'kiss',
             group: 'rp',
-            memberName: 'kill',
-            description: 'Kill someone.',
-            examples: ['kill']
+            memberName: 'kiss',
+            description: 'Kiss someone.',
+            examples: ['/kiss <mention>']
         });
     }
 
