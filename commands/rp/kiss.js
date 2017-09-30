@@ -1,13 +1,20 @@
-exports.run = async (client, message, args) => {
+module.exports = class KissCommand extends Command {
+    constructor(client) {
+        super(client, {
+            name: 'kill',
+            group: 'rp',
+            memberName: 'kill',
+            description: 'Kill someone.',
+            examples: ['kill']
+        });
+    }
 
-    let member = message.mentions.users.first().username;
-    message.delete().catch(O_o=>{});
-      message.channel.send({embed: {
-  color: 3447003,
-  title: "```* "+message.author.username+" kissed "+member+"...```"
-}})
+    run(message) {
+      let member = message.mentions.users.first().username;
+      message.delete().catch(O_o=>{});
+        message.channel.send({embed: {
+    color: 3447003,
+    title: "```* "+message.author.username+" kissed "+member+"...```"
+  }});
+    }
 };
-
-exports.help = {
-  name:"kiss"
-}

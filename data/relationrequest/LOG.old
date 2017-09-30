@@ -1,14 +1,5 @@
-2017/09/26-22:22:28.276 cff4 Recovering log #77
-2017/09/26-22:22:28.276 cff4 Level-0 table #79: started
-2017/09/26-22:22:28.353 cff4 Level-0 table #79: 286 bytes OK
-2017/09/26-22:22:28.493 cff4 Delete type=0 #77
-2017/09/26-22:22:28.494 cff4 Delete type=3 #75
-2017/09/26-22:22:28.496 d4ac Compacting 4@0 + 1@1 files
-2017/09/26-22:22:28.573 d4ac Generated table #81@0: 4 keys, 286 bytes
-2017/09/26-22:22:28.573 d4ac Compacted 4@0 + 1@1 files => 286 bytes
-2017/09/26-22:22:28.599 d4ac compacted to: files[ 0 1 0 0 0 0 0 ]
-2017/09/26-22:22:28.600 d4ac Delete type=2 #68
-2017/09/26-22:22:28.601 d4ac Delete type=2 #70
-2017/09/26-22:22:28.601 d4ac Delete type=2 #73
-2017/09/26-22:22:28.602 d4ac Delete type=2 #76
-2017/09/26-22:22:28.603 d4ac Delete type=2 #79
+2017/09/28-18:08:12.096 f670 Recovering log #100
+2017/09/28-18:08:12.096 f670 Level-0 table #102: started
+2017/09/28-18:08:12.254 f670 Level-0 table #102: 286 bytes OK
+2017/09/28-18:08:12.481 f670 Delete type=0 #100
+2017/09/28-18:08:12.481 f670 Delete type=3 #98

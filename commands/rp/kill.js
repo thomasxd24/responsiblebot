@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando');
 
-module.exports = class ExcitedCommand extends Command {
+module.exports = class KillCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'kill',
