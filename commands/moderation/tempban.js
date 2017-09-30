@@ -1,13 +1,13 @@
 
 const { Command } = require('discord.js-commando');
-module.exports = class KickCommand extends Command {
+module.exports = class TempbanCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'mute',
+            name: 'tempban',
             group: 'moderation',
-            memberName: 'mute',
-            description: 'Mute someone.',
-            examples: ['/mute <mention> <reason>']
+            memberName: 'tempban',
+            description: 'Tempban someone.',
+            examples: ['/tempban <mention>']
         });
     }
 

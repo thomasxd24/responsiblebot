@@ -1,13 +1,13 @@
 
 const { Command } = require('discord.js-commando');
-module.exports = class KickCommand extends Command {
+module.exports = class LockCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'mute',
+            name: 'lock',
             group: 'moderation',
-            memberName: 'mute',
-            description: 'Mute someone.',
-            examples: ['/mute <mention> <reason>']
+            memberName: 'lock',
+            description: 'Lock a channel.',
+            examples: ['/lock <channel>']
         });
     }
 

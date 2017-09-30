@@ -1,13 +1,13 @@
 
 const { Command } = require('discord.js-commando');
-module.exports = class KickCommand extends Command {
+module.exports = class WhoisCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'mute',
+            name: 'whois',
             group: 'moderation',
-            memberName: 'mute',
-            description: 'Mute someone.',
-            examples: ['/mute <mention> <reason>']
+            memberName: 'whois',
+            description: 'Whois someone.',
+            examples: ['/whois <mention>']
         });
     }
 

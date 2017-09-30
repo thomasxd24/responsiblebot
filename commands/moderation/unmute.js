@@ -1,13 +1,13 @@
 
 const { Command } = require('discord.js-commando');
-module.exports = class KickCommand extends Command {
+module.exports = class UnmuteCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'mute',
+            name: 'unmute',
             group: 'moderation',
-            memberName: 'mute',
-            description: 'Mute someone.',
-            examples: ['/mute <mention> <reason>']
+            memberName: 'unmute',
+            description: 'Unmute someone.',
+            examples: ['/unmute [mention]']
         });
     }
 

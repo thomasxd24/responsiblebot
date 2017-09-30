@@ -1,13 +1,13 @@
 
 const { Command } = require('discord.js-commando');
-module.exports = class KickCommand extends Command {
+module.exports = class StatusCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'mute',
+            name: 'status',
             group: 'moderation',
-            memberName: 'mute',
-            description: 'Mute someone.',
-            examples: ['/mute <mention> <reason>']
+            memberName: 'status',
+            description: 'Show the status of the bot.',
+            examples: ['/status']
         });
     }
 
