@@ -6,5 +6,8 @@ LittleBrother is an open source [Discord](https://discordapp.com/) bot created b
 ## Available Commands
 This bot is still in early development phase, so the commands are constantly added or changed. The list will be available when development reaches certain status.
 
+## Command Prefix
+Use '/' or tag '@LittleBrother' directly.
+
 ## Development Status
 Testing.

@@ -13,6 +13,7 @@ exports.run = async (bot, message, args) => {
       case "dad":
         return "Mum";
         break;
+      case "mom": // fall through
       case "mum":
         return "Dad";
         break;
@@ -42,7 +43,7 @@ exports.run = async (bot, message, args) => {
           console.log(requestList);
           bot.relationRequest.set(message.author.id,requestList);
           message.mentions.users.first().send(`Hai my friend ${message.author.username} want to be ${args.slice(2).join(' ')} with you, do: \`\`\`/relation accept @${message.author.tag} ${args.slice(2).join(' ')}\`\`\` to accept his request`)
-          message.channel.send("There, i sent to that nub");
+          message.channel.send("There, I sent to that nub");
         }
         else {
           message.channel.send("No Relation");
@@ -151,7 +152,7 @@ exports.run = async (bot, message, args) => {
       break;
 
     default:
-      message.channel.send("Guess what, it didnt work");
+      message.channel.send("Guess what, it didnt work...");
   }
 };
 

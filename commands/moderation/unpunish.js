@@ -7,7 +7,7 @@ module.exports = class UnpunishCommand extends Command {
             group: 'moderation',
             memberName: 'unpunish',
             description: 'Unpunish someone.',
-            examples: ['/unpunish [mention]']
+            examples: ['/unpunish <mention>']
         });
     }
 

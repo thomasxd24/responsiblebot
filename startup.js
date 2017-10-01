@@ -83,6 +83,7 @@ client.registry
   .registerGroups([
       ['moderation', 'Moderation'],
       ['rp', 'RolePlay'],
+			['image', 'Images'],
       ['util', 'Utility'],
       ['misc','Miscellaneous'],
 
