@@ -7,7 +7,7 @@ module.exports = class FlipTableCommand extends Command {
             group: 'rp',
             memberName: 'fliptable',
             description: 'Flip the table with rage.',
-            examples: ['fliptable']
+            examples: ['/fliptable']
         });
     }
 

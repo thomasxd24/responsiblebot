@@ -7,7 +7,7 @@ module.exports = class UnwarnCommand extends Command {
             group: 'moderation',
             memberName: 'unwarn',
             description: 'Unwarn someone.',
-            examples: ['/unwarn [mention]']
+            examples: ['/unwarn <mention>']
         });
     }
 

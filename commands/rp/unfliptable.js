@@ -7,7 +7,7 @@ module.exports = class UnFlipTableCommand extends Command {
             group: 'rp',
             memberName: 'unfliptable',
             description: 'Put the flipped table back.',
-            examples: ['unfliptable']
+            examples: ['/unfliptable']
         });
     }
 

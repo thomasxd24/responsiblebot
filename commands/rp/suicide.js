@@ -7,7 +7,7 @@ module.exports = class SuicideCommand extends Command {
             group: 'rp',
             memberName: 'suicide',
             description: 'Commit suicide.',
-            examples: ['suicide']
+            examples: ['/suicide']
         });
     }
 

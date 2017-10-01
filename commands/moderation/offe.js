@@ -6,7 +6,7 @@ module.exports = class OffeCommand extends Command {
             name: 'offe',
             group: 'moderation',
             memberName: 'offe',
-            description: 'Check the offence of a player or yourself.',
+            description: 'Check the offence of a member.',
             examples: ['/offe [mention]']
         });
     }

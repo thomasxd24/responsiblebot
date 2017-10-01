@@ -7,7 +7,7 @@ module.exports = class ScaredCommand extends Command {
             group: 'rp',
             memberName: 'scared',
             description: 'Feel Scared.',
-            examples: ['scared']
+            examples: ['/scared']
         });
     }
 

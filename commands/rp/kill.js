@@ -7,7 +7,7 @@ module.exports = class KillCommand extends Command {
             group: 'rp',
             memberName: 'kill',
             description: 'Kill someone.',
-            examples: ['kill']
+            examples: ['/kill']
         });
     }
 
