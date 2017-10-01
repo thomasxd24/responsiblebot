@@ -7,7 +7,7 @@ module.exports = class UnmuteCommand extends Command {
             group: 'moderation',
             memberName: 'unmute',
             description: 'Unmute someone.',
-            examples: ['/unmute <mention>']
+            examples: ['/unmute [mention]']
         });
     }
 
