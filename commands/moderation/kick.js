@@ -12,6 +12,6 @@ module.exports = class KickCommand extends Command {
     }
 
     run(message) {
-      message.channel.send("git kicked :wink:");
+      message.channel.send("git kicked -_-");
     }
 };

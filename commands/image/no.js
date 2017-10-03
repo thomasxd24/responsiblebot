@@ -1,13 +1,13 @@
 const { Command } = require('discord.js-commando');
 
-module.exports = class CatCommand extends Command {
+module.exports = class NoCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'cat',
+            name: 'no',
             group: 'image',
-            memberName: 'cat',
-            description: 'Show a random image of cat.',
-            examples: ['/cat']
+            memberName: 'no',
+            description: 'Show a random image of no.',
+            examples: ['/no']
         });
     }
 

@@ -11,19 +11,19 @@ module.exports = class SuperSecretCommand extends Command {
         });
     }
 
-    var chance = Math.random();
-    var message;
-    if (chance > 0.95) {
-      message = "```* OMG HELLO!!!```"
-    } else {
-      message = msg.author.username+", Unknown command. Use `/help` or `@LittleBrother#3486 help` to view the list of all commands."
-    }
+
 
     run(msg) {
+      var chance = Math.random();
+      if (chance > 0.95) {
         msg.delete().catch(O_o=>{});
           msg.channel.send({embed: {
       color: 3447003,
-      title: message
+      title: "```* OMG HELLO!!!```"
     }});
+      } else {
+        msg.channel.send(msg.author.username+", Unknown command. Use `/help` or `@LittleBrother#3486 help` to view the list of all commands.");
+      }
+
     }
 };

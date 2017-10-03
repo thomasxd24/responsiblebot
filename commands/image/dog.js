@@ -13,10 +13,6 @@ module.exports = class DogCommand extends Command {
 
 // Credit : Unsplash source API. (Do not remove this comment.)
     run(message) {
-      message.delete().catch(O_o=>{});
-        message.channel.send({embed: {
-    color: 3447003,
-    title: "https://source.unsplash.com/1280x720/?pet,dog"
-  }});
+      message.channel.send("https://source.unsplash.com/1280x720/?pet,dog" );
     }
 };

@@ -12,11 +12,8 @@ module.exports = class SayCommand extends Command {
     }
 
     run(message) {
-      message.channel.send("WIP :wink:");
-      //const sayMessage = args.join(" ");
-          // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
-        //  message.delete().catch(O_o=>{});
-          // And we get the bot to say the thing:
-          //message.channel.send(sayMessage);
+    // const sayMessage = args.join(" ");
+    //       message.delete().catch(O_o=>{});
+    //       message.channel.send(sayMessage);
     }
 };
