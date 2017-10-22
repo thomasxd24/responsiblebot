@@ -15,6 +15,12 @@ client
 	.on('error', console.error)
 	.on('warn', console.warn)
 	.on('debug', console.log)
+	.on("guildMemberAdd", (member) => {
+		console.log(member.guild.roles.find("name","BeginningGamer").name);
+		console.log(member.addRole(member.guild.roles.find("name","BeginningGamer")));
+		member.guild.channels.find("name", "welcome").send("Welcome to our server <@"+member.id+">.\nRemember to be responsible :wink:").catch(console.log);
+
+})
 	.on('ready', () => {
     client.relationRequest = new Enmap({name: "relationRequest",persistent: true});
     client.relation = new Enmap({name: "relation",persistent: true});
@@ -24,12 +30,12 @@ client
     console.log("Loaded relation");
     console.log("Loaded muted");
     console.log("Loaded offences");
-    client.user.setGame(`with BigBrother.`);
+    client.user.setGame(`with responsibility -_-`);
     var anti_spam = require("./anti-spam.js");
     anti_spam(client, {
       warnBuffer: 5, //Maximum amount of messages allowed to send in the interval time before getting warned.
       maxBuffer: 8, // Maximum amount of messages allowed to send in the interval time before getting banned.
-      interval: 4000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
+      interval: 2000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
       warningMessage: "stop spamming or you will be warned/muted.", // Warning message send to the user indicating they are going to fast.
       banMessage: "has been muted for spamming for 5 minutes, anyone else?", // Ban message, always tags the banned user in front of it.
       maxDuplicatesWarning : 3, // Maximum amount of duplicate messages a user can send in a timespan before getting warned

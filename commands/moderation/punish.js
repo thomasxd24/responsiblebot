@@ -1,4 +1,5 @@
-
+const sql = require("sqlite");
+sql.open("./offences.sqlite");
 const { Command } = require('discord.js-commando');
 module.exports = class PunishCommand extends Command {
     constructor(client) {
@@ -7,11 +8,23 @@ module.exports = class PunishCommand extends Command {
             group: 'moderation',
             memberName: 'punish',
             description: 'Punish someone.',
-            examples: ['/punish <mention> <reason>']
+            examples: ['/punish <mention> <reason>'],
+            args: [
+                {
+                    key: 'user',
+                    prompt: 'Which user do you want to punish',
+                    type: 'user'
+                },
+                {
+                    key: 'reason',
+                    prompt: 'Why would you want to punish him?',
+                    type: 'string'
+                }
+            ]
         });
     }
 
-    run(message) {
-      message.channel.send("git punished :wink:");
+    run(message, { user, content }) {
+
     }
 };
