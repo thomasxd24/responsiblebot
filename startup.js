@@ -30,7 +30,7 @@ client
       warnBuffer: 5, //Maximum amount of messages allowed to send in the interval time before getting warned.
       maxBuffer: 8, // Maximum amount of messages allowed to send in the interval time before getting banned.
       interval: 2000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
-      warningMessage: "stop spamming or you will be warned/muted.", // Warning message send to the user indicating they are going to fast.
+      warningMessage: " refrain from spamming or you shall be punished accordingly.", // Warning message send to the user indicating they are going to fast.
       banMessage: "has been muted for spamming for 5 minutes, anyone else?", // Ban message, always tags the banned user in front of it.
       maxDuplicatesWarning : 3, // Maximum amount of duplicate messages a user can send in a timespan before getting warned
       maxDuplicatesBan : 5, // Maximum amount of duplicate messages a user can send in a timespan before getting banned

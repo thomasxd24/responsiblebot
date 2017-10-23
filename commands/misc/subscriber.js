@@ -12,7 +12,7 @@ module.exports = class subscriberCommand extends Command {
     }
 
     run(msg) {
-      if(msg.author.id == "186824408227119104" or msg.author.id == "325644122063110156")
+      if(msg.author.id == "186824408227119104" || msg.author.id == "325644122063110156")
       {
         let role1 = msg.guild.roles.find("name", "DedicatedMember");
         let role2 = msg.guild.roles.find("name", "Subscriber");
