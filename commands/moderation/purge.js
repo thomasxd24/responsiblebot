@@ -7,12 +7,19 @@
               group: 'moderation',
               memberName: 'purge',
               description: 'Ban someone.',
-              examples: ['/ban <mention> <reason>']
+              examples: ['/ban <mention> <reason>'],
+              args: [
+                  {
+                      key: 'number',
+                      prompt: 'How many messages would u want to delete?',
+                      type: 'string'
+                  }
+              ]
           });
       }
 
-      run(message) {
-        let messagecount = parseInt(20);
+      run(message,{ number }) {
+        let messagecount = parseInt(parseInt(number));
           message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
 
       }

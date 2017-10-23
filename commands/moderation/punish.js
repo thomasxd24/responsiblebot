@@ -1,5 +1,3 @@
-const sql = require("sqlite");
-sql.open("./offences.sqlite");
 const { Command } = require('discord.js-commando');
 module.exports = class PunishCommand extends Command {
     constructor(client) {
@@ -25,6 +23,11 @@ module.exports = class PunishCommand extends Command {
     }
 
     run(message, { user, content }) {
+      sqlite.get(`SELECT * FROM offences WHERE userid = "${message.author.id}" and `).then(row => {
 
+
+}).catch(() => {
+
+});
     }
 };

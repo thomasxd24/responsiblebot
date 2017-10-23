@@ -4,7 +4,8 @@ const path = require('path');
 const oneLine = require('common-tags').oneLine;
 const sqlite = require('sqlite');
 const config = require("./config.json");
-
+const punishreason = new Discord.Collection();
+const punishlevel = new Discord.Collection();
 const client = new commando.Client({
 	owner: '186824408227119104',
 	commandPrefix: '/'
@@ -20,6 +21,8 @@ client
 
 })
 	.on('ready', () => {
+		let punishreason = {reasonname : , reasonalts: , minpunishlevel : };
+		let punishlevel = {punishtype : , punishduration: };
     console.log("Loaded relationRequest");
     console.log("Loaded relation");
     console.log("Loaded muted");

@@ -17,7 +17,6 @@ module.exports = class subscriberCommand extends Command {
         let role1 = msg.guild.roles.find("name", "DedicatedMember");
         let role2 = msg.guild.roles.find("name", "Subscriber");
 
-
   // Let's pretend you mentioned the user you want to add a role to (!addrole @user Role Name):
   let member = msg.mentions.members.first();
 
@@ -28,6 +27,7 @@ module.exports = class subscriberCommand extends Command {
 
   // Remove a role!
   member.addRole(role2).catch(console.error);
+  msg.channel.send("Welcome to the family <@"+member.id+"> :smile:");
       }
       else {
         msg.channel.send("No permission nub");
