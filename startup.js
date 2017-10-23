@@ -1,5 +1,4 @@
 const fs = require("fs");
-const Enmap = require('enmap');
 const commando = require('discord.js-commando');
 const path = require('path');
 const oneLine = require('common-tags').oneLine;
@@ -16,21 +15,16 @@ client
 	.on('warn', console.warn)
 	.on('debug', console.log)
 	.on("guildMemberAdd", (member) => {
-		console.log(member.guild.roles.find("name","BeginningGamer").name);
 		console.log(member.addRole(member.guild.roles.find("name","BeginningGamer")));
 		member.guild.channels.find("name", "welcome").send("Welcome to our server <@"+member.id+">.\nRemember to be responsible :wink:").catch(console.log);
 
 })
 	.on('ready', () => {
-    client.relationRequest = new Enmap({name: "relationRequest",persistent: true});
-    client.relation = new Enmap({name: "relation",persistent: true});
-    client.muted = new Enmap({name: "muted",persistent: true});
-    client.offences = new Enmap({name: "offences",persistent: true});
     console.log("Loaded relationRequest");
     console.log("Loaded relation");
     console.log("Loaded muted");
     console.log("Loaded offences");
-    client.user.setGame(`with responsibility -_-`);
+    client.user.setGame(`with responsibility`);
     var anti_spam = require("./anti-spam.js");
     anti_spam(client, {
       warnBuffer: 5, //Maximum amount of messages allowed to send in the interval time before getting warned.
