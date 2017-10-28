@@ -1,11 +1,12 @@
 const fs = require("fs");
 const commando = require('discord.js-commando');
+const discord = require('discord.js');
 const path = require('path');
 const oneLine = require('common-tags').oneLine;
 const sqlite = require('sqlite');
 const config = require("./config.json");
-const punishreason = new Discord.Collection();
-const punishlevel = new Discord.Collection();
+const punishreason = new discord.Collection();
+const punishlevel = new discord.Collection();
 const client = new commando.Client({
 	owner: '186824408227119104',
 	commandPrefix: '/'
@@ -21,8 +22,11 @@ client
 
 })
 	.on('ready', () => {
-		let punishreason = {reasonname : , reasonalts: , minpunishlevel : };
-		let punishlevel = {punishtype : , punishduration: };
+		// let punishreason = {reasonname : , reasonalts: , minpunishlevel : };
+
+
+
+		// let punishlevel = {punishtype : , punishduration: };
     console.log("Loaded relationRequest");
     console.log("Loaded relation");
     console.log("Loaded muted");
@@ -33,7 +37,7 @@ client
       warnBuffer: 5, //Maximum amount of messages allowed to send in the interval time before getting warned.
       maxBuffer: 8, // Maximum amount of messages allowed to send in the interval time before getting banned.
       interval: 2000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
-      warningMessage: " refrain from spamming or you shall be punished accordingly.", // Warning message send to the user indicating they are going to fast.
+      warningMessage: "refrain from spamming or you shall be punished accordingly.", // Warning message send to the user indicating they are going to fast.
       banMessage: "has been muted for spamming for 5 minutes, anyone else?", // Ban message, always tags the banned user in front of it.
       maxDuplicatesWarning : 3, // Maximum amount of duplicate messages a user can send in a timespan before getting warned
       maxDuplicatesBan : 5, // Maximum amount of duplicate messages a user can send in a timespan before getting banned
@@ -75,11 +79,35 @@ client
 	.on("message", async message => {
 	  if(message.member.roles.some(r=>["Muted"].includes(r.name)) )
 	     return message.delete().catch(O_o=>{});
+
+		if(message.guild.name == "ResponsibleRevolution")
+		{
+			if(!message.author.bot)
+			{
+				if(message.channel.name == "suggestions")
+				{
+				 if(!message.content.startsWith("Suggestion:"))
+				 {
+					 message.delete().catch(O_o=>{});
+					 message.author.send("Please use the correct format. (Suggestion:) in #suggestion")
+				 }
+				}
+			}
+
+	  }
+
 	});
 
 client.setProvider(
 	sqlite.open(path.join(__dirname, 'database.sqlite3')).then(db => new commando.SQLiteProvider(db))
 ).catch(console.error);
+// console.log(sqlite.all('SELECT * FROM punishreason').then(rows => function(x){
+// 	consolve.log(x);
+// 	x.forEach(function (row) {
+// 		console.log(row.reasonid.toString());
+// 	})
+// })
+// );
 
 client.registry
 .registerDefaultTypes()

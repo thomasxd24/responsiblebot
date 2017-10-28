@@ -23,7 +23,7 @@ module.exports = class PunishCommand extends Command {
     }
 
     run(message, { user, content }) {
-      sqlite.get(`SELECT * FROM offences WHERE userid = "${message.author.id}" and `).then(row => {
+      sqlite.each(`SELECT * FROM offences WHERE userid = "${message.author.id}" and `).then(row => {
 
 
 }).catch(() => {

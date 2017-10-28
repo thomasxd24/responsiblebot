@@ -18,7 +18,7 @@ module.exports = class KickCommand extends Command {
           message.channel.send("You're muted.");
       }
       else {
-        msg.channel.send("No permission nub");
+        msg.channel.send(`<@${msg.author.id}>, you lack the responsibility to use this command`);
       }
     }
 };
