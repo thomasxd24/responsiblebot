@@ -76,7 +76,7 @@ function get_fen_img(id) {
             chesses[id] = new Chess();
             console.log('Chess game: ', message.author.username + ' vs NeuroChess');
             thinking[id] = false;
-            stockfishes[id] = STOCKFISH();
+            stockfishes[id] = stockfish();
             stockfishes[id].postMessage('setoption name Contempt value 30');
             stockfishes[id].postMessage('setoption name Skill Level value 20');
             stockfishes[id].postMessage('ucinewgame');

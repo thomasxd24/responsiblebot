@@ -7,6 +7,7 @@ const sqlite = require('sqlite');
 const config = require("./config.json");
 const punishreason = new discord.Collection();
 const punishlevel = new discord.Collection();
+global.afk = new discord.Collection();
 const client = new commando.Client({
 	owner: '186824408227119104',
 	commandPrefix: '/'
@@ -80,21 +81,30 @@ client
 	  if(message.member.roles.some(r=>["Muted"].includes(r.name)) )
 	     return message.delete().catch(O_o=>{});
 
-		if(message.guild.name == "ResponsibleRevolution")
+		if(message.guild.name == "ResponsibleRevolution" && !message.author.bot && message.channel.name == "suggestions" && !message.content.startsWith("Suggestion:"))
 		{
-			if(!message.author.bot)
-			{
-				if(message.channel.name == "suggestions")
-				{
-				 if(!message.content.startsWith("Suggestion:"))
-				 {
+
 					 message.delete().catch(O_o=>{});
 					 message.author.send("Please use the correct format. (Suggestion:) in #suggestion")
-				 }
-				}
-			}
+
 
 	  }
+		console.log(global.afk.get(message.author.id));
+		if(!message.author.bot)
+		{
+			if(global.afk.get(message.author.id))
+			{
+				global.afk.delete(message.author.id);
+				message.channel.send(`<@${message.author.id}> is no longer afk.`)
+			}
+			if(global.afk.get(message.mentions.users.first().id))
+			{
+				if(global.afk.get(message.mentions.users.first().id)['afkmsg'] != "")
+				message.channel.send(`<@${message.mentions.users.first().id}> is currently afk for : ${global.afk.get(message.mentions.users.first().id)['afkmsg']}.`)
+			}
+		}
+
+
 
 	});
 
