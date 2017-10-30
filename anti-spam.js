@@ -21,7 +21,7 @@ module.exports = function (bot, options) {
 
   bot.on('message', msg => {
 
-    if(msg.author.bot){
+    if(!msg.author.bot){
       var now = Math.floor(Date.now());
       authors.push({
         "time": now,

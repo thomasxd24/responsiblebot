@@ -13,7 +13,6 @@ module.exports = class UnmuteCommand extends Command {
 
     hasPermission(msg) {
       const userMaxPermission = msg.member.roles.sort((r1, r2) => r2.calculatedPosition - r1.calculatedPosition).first().calculatedPosition;
-      console.log(msg.guild.roles.find("name",permissionRole));
       if(msg.guild.roles.find("name",permissionRole) == null)
       {
         return false;
