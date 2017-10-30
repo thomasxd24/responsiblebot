@@ -1,4 +1,5 @@
 const { Command } = require('discord.js-commando');
+const permissionRole = "Helper";
 module.exports = class PunishCommand extends Command {
     constructor(client) {
         super(client, {
@@ -20,6 +21,23 @@ module.exports = class PunishCommand extends Command {
                 }
             ]
         });
+    }
+
+    hasPermission(msg) {
+      const userMaxPermission = msg.member.roles.sort((r1, r2) => r2.calculatedPosition - r1.calculatedPosition).first().calculatedPosition;
+      console.log(msg.guild.roles.find("name",permissionRole));
+      if(msg.guild.roles.find("name",permissionRole) == null)
+      {
+        return false;
+      }
+      const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
+      if(userMaxPermission >= cmdPermission)
+      {
+        return true;
+      }
+      else {
+        return false;
+      }
     }
 
     run(message, { user, content }) {

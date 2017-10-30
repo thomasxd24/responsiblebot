@@ -1,3 +1,4 @@
+const permissionRole = "DedicatedMember";
 const { Command } = require('discord.js-commando');
 
 module.exports = class AFKCommand extends Command {
@@ -19,8 +20,24 @@ module.exports = class AFKCommand extends Command {
         });
     }
 
+    hasPermission(msg) {
+      const userMaxPermission = msg.member.roles.sort((r1, r2) => r2.calculatedPosition - r1.calculatedPosition).first().calculatedPosition;
+      console.log(msg.guild.roles.find("name",permissionRole));
+      if(msg.guild.roles.find("name",permissionRole) == null)
+      {
+        return false;
+      }
+      const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
+      if(userMaxPermission >= cmdPermission)
+      {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
     run(msg,{reason}) {
-      console.log(reason);
       if (reason == '') {
         let afkList = global.afk.get(msg.author.id);
 

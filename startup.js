@@ -9,7 +9,7 @@ const punishreason = new discord.Collection();
 const punishlevel = new discord.Collection();
 global.afk = new discord.Collection();
 const client = new commando.Client({
-	owner: '186824408227119104',
+	owner: ['186824408227119104','325644122063110156'],
 	commandPrefix: '/'
 });
 
@@ -23,15 +23,11 @@ client
 
 })
 	.on('ready', () => {
-		// let punishreason = {reasonname : , reasonalts: , minpunishlevel : };
+
 
 
 
 		// let punishlevel = {punishtype : , punishduration: };
-    console.log("Loaded relationRequest");
-    console.log("Loaded relation");
-    console.log("Loaded muted");
-    console.log("Loaded offences");
     client.user.setGame(`with responsibility`);
     var anti_spam = require("./anti-spam.js");
     anti_spam(client, {
