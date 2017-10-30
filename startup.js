@@ -89,7 +89,6 @@ client
 
 
 	  }
-		console.log(global.afk.get(message.author.id));
 		if(!message.author.bot)
 		{
 			if(global.afk.get(message.author.id))
