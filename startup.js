@@ -42,6 +42,7 @@ client
     console.log(`Client ready; logged in as ${client.user.username}#${client.user.discriminator} (${client.user.id})`);
 	})
 	.on('disconnect', () => { console.warn('Disconnected!'); })
+	.on('guildMemberRemove', (member) => { member.guild.channels.find("name", "logs").send(`<@${member.id}> Left the server`).catch(console.log); })
 	.on('reconnecting', () => { console.warn('Reconnecting...'); })
 	.on('commandError', (cmd, err) => {
 		if(err instanceof commando.FriendlyError) return;
