@@ -7,6 +7,34 @@ const sqlite = require('sqlite');
 const config = require("./config.json");
 const punishreason = new discord.Collection();
 const punishlevel = new discord.Collection();
+const express = require('express');
+const app = express();
+
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+const port = process.env.PORT || 5000;
+
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
+// make express look in the `public` directory for assets (css/js/img)
+app.use(express.static(__dirname + '/public'));
+
+// set the home page route
+app.get('/', (request, response) => {
+    // ejs render automatically looks in the views folder
+    response.render('index');
+});
+
+app.listen(port, () => {
+    // will echo 'Our app is running on http://localhost:5000 when run locally'
+    console.log('Our app is running on http://localhost:' + port);
+});
+setInterval(() => {
+  http.get('http://littlebrother-discord.herokuapp.com');
+}, 900000);
+global.stockfish = require("stockfish");
+console.log(global.stockfish);
 global.afk = new discord.Collection();
 const client = new commando.Client({
 	owner: ['186824408227119104','325644122063110156'],
@@ -33,7 +61,7 @@ client
     anti_spam(client, {
       warnBuffer: 5, //Maximum amount of messages allowed to send in the interval time before getting warned.
       maxBuffer: 8, // Maximum amount of messages allowed to send in the interval time before getting banned.
-      interval: 2000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
+      interval: 1000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
       warningMessage: "refrain from spamming or you shall be punished accordingly.", // Warning message send to the user indicating they are going to fast.
       banMessage: "has been muted for spamming for 5 minutes, anyone else?", // Ban message, always tags the banned user in front of it.
       maxDuplicatesWarning : 3, // Maximum amount of duplicate messages a user can send in a timespan before getting warned

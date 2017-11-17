@@ -7,7 +7,14 @@ module.exports = class KickCommand extends Command {
             group: 'moderation',
             memberName: 'mute',
             description: 'Mute someone.',
-            examples: ['/mute <mention> <reason>']
+            examples: ['/mute <mention> <reason>'],
+            args: [
+                {
+                    key: 'member',
+                    prompt: 'Who are you muting?',
+                    type: 'member'
+                }
+            ]
         });
     }
 
@@ -27,7 +34,7 @@ module.exports = class KickCommand extends Command {
       }
     }
 
-    run(message) {
+    run(message,{member}) {
       if(message.author.id == "186824408227119104" || message.author.id == "325644122063110156")
       {
           member.addRole(message.guild.roles.find("name", "Muted")).catch(console.error);
