@@ -9,6 +9,7 @@ const punishreason = new discord.Collection();
 const punishlevel = new discord.Collection();
 const express = require('express');
 const app = express();
+const http = require('http');
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
