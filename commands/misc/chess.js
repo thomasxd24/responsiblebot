@@ -96,8 +96,9 @@ var SIDENAMES = {w:'Black', b:'White'};
                 var match = line.match(/^bestmove ([a-h][1-8])([a-h][1-8])([qrbn])?/);
                 if(match) {
                     var m = chesses[id].move({from: match[1], to: match[2], promotion: match[3]});
-                    message.reply("Your Turn!", {
+                    lastmsg[id] = message.reply("Your Turn!", {
     file: get_fen_img(id) });
+    console.log(lastmsg[id]);
                     thinking[id] = false;
                     if(chesses[id].game_over()) {
                         end_game(id, false, false);
