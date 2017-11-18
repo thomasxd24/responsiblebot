@@ -21,7 +21,7 @@ var SIDENAMES = {w:'Black', b:'White'};
                         args: [
                             {
                                 key: 'move',
-                                prompt: 'Who are you kicking?',
+                                prompt: 'What moves are you making?',
                                 type: 'string'
                             }
                         ]
