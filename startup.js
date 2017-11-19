@@ -10,7 +10,7 @@ const punishlevel = new discord.Collection();
 const express = require('express');
 const app = express();
 const http = require('http');
-
+global.queue = new Map();
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
 const port = process.env.PORT || 5000;
@@ -132,6 +132,8 @@ client
 
 
 	});
+
+
 
 client.setProvider(
 	sqlite.open(path.join(__dirname, 'database.sqlite3')).then(db => new commando.SQLiteProvider(db))

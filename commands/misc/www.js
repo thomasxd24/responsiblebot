@@ -7,15 +7,18 @@ module.exports = class WWWCommand extends Command {
             group: 'misc',
             memberName: 'www',
             description: 'Provide the link to ExtremeCraft.',
-            examples: ['/www']
+            examples: ['/www'],
+            args: [
+                {
+                    key: 'text',
+                    prompt: 'Who are you banning?',
+                    type: 'string'
+                }
+            ]
         });
     }
 
-    run(msg) {
-        msg.delete().catch(O_o=>{});
-          msg.channel.send({embed: {
-      color: 3447003,
-      title: "https://www.extremecraft.net/"
-    }});
+    run(msg,{text}) {
+         console.log(text.split(''));
     }
 };
