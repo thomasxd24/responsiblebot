@@ -47,7 +47,7 @@ module.exports = class PlayCommand extends Command {
     async run(msg,{link}) {
       const url = link;
       const voiceChannel = msg.member.voiceChannel;
-    		if (!voiceChannel) return msg.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
+    		if (!voiceChannel) return msg.channel.send('You are requred to be in a voice channel in order for music to commence!');
     		const permissions = voiceChannel.permissionsFor(msg.client.user);
     		if (!permissions.has('CONNECT')) {
     			return msg.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
@@ -61,9 +61,9 @@ module.exports = class PlayCommand extends Command {
     			const videos = await playlist.getVideos();
     			for (const video of Object.values(videos)) {
             if (queue.get(msg.guild.id)) {
-              if(queue.get(msg.guild.id).songs.length == 10)
+              if(queue.get(msg.guild.id).songs.length == 20)
               {
-                return msg.reply(`✅ Playlist: **${playlist.title}** has been added to the queue! You cannot exceed song queue limit (10) because of <@!325644122063110156>`);
+                return msg.reply(`✅ Playlist: **${playlist.title}** has been added to the queue! You cannot exceed song queue limit (20)`);
               }
             }
 
@@ -138,9 +138,9 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 			return msg.channel.send(`I could not join the voice channel: ${error}`);
 		}
 	} else {
-    if(queue.get(msg.guild.id).songs.length == 10)
+    if(queue.get(msg.guild.id).songs.length == 20)
     {
-      return msg.reply(`You cannot exceed song queue limit (10) because of <@!325644122063110156>`);
+      return msg.reply(`You cannot exceed song queue limit (20)`);
     }
 		serverQueue.songs.push(song);
 		console.log(serverQueue.songs);
