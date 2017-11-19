@@ -13,9 +13,9 @@ module.exports = class SkipCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'skip',
-            group: 'misc',
+            group: 'music',
             memberName: 'skip',
-            description: 'Go play.',
+            description: 'Skips Now Playing',
             examples: ['/afk']
 
         });
@@ -30,7 +30,8 @@ module.exports = class SkipCommand extends Command {
       const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
       if(userMaxPermission >= cmdPermission)
       {
-        return true;
+        if(msg.channel.name == "music") return true;
+        return "Test";
       }
       else {
         return false;

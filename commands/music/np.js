@@ -11,9 +11,9 @@ module.exports = class NPCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'np',
-            group: 'misc',
+            group: 'music',
             memberName: 'np',
-            description: 'Go play.',
+            description: 'Shows Now Playing',
             examples: ['/afk']
         });
     }
@@ -27,7 +27,8 @@ module.exports = class NPCommand extends Command {
       const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
       if(userMaxPermission >= cmdPermission)
       {
-        return true;
+        if(msg.channel.name == "music") return true;
+        return false;
       }
       else {
         return false;

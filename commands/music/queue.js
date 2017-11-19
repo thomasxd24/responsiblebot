@@ -11,9 +11,9 @@ module.exports = class QueueCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'queue',
-            group: 'misc',
+            group: 'music',
             memberName: 'queue',
-            description: 'Go play.',
+            description: 'Show queues and Now Playing',
             examples: ['/afk']
         });
     }
@@ -27,7 +27,8 @@ module.exports = class QueueCommand extends Command {
       const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
       if(userMaxPermission >= cmdPermission)
       {
-        return true;
+        if(msg.channel.name == "music") return true;
+        return false;
       }
       else {
         return false;

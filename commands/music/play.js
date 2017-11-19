@@ -12,10 +12,10 @@ module.exports = class PlayCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'play',
-            group: 'misc',
+            group: 'music',
             memberName: 'play',
-            description: 'Go play.',
-            examples: ['/afk'],
+            description: 'Play a youtube link or playlist or search in youtube',
+            examples: ['/play'],
             args: [
                 {
                     key: 'link',
@@ -35,11 +35,13 @@ module.exports = class PlayCommand extends Command {
       const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
       if(userMaxPermission >= cmdPermission)
       {
-        return true;
+        if(msg.channel.name == "music") return true;
+        return false;
       }
       else {
         return false;
       }
+
     }
 
     async run(msg,{link}) {
@@ -161,11 +163,11 @@ function play(guild, song) {
 	const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
 		.on('end', reason => {
 			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-			else console.log(reason);
+			else console.log(reason+"reason:");
 			serverQueue.songs.shift();
 			play(guild, serverQueue.songs[0]);
 		})
-		.on('error', error => console.error(error));
+		.on('error', error => console.error(error+"error:"));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
 
 	serverQueue.textChannel.send(`🎶 Now playing: **${song.title}**`);

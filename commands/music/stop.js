@@ -13,7 +13,7 @@ module.exports = class StopCommand extends Command {
             name: 'stop',
             group: 'misc',
             memberName: 'stop',
-            description: 'Go play.',
+            description: 'Stops the bot and empty the whole queue',
             examples: ['/afk']
         });
     }
@@ -27,7 +27,8 @@ module.exports = class StopCommand extends Command {
       const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
       if(userMaxPermission >= cmdPermission)
       {
-        return true;
+        if(msg.channel.name == "music") return true;
+        return false;
       }
       else {
         return false;

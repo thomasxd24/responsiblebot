@@ -11,7 +11,7 @@ module.exports = class WWWCommand extends Command {
             args: [
                 {
                     key: 'text',
-                    prompt: 'Who are you banning?',
+                    prompt: 'Text? Ignore this command it does nothing',
                     type: 'string'
                 }
             ]

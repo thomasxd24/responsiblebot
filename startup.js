@@ -153,6 +153,7 @@ client.registry
       ['rp', 'RolePlay'],
 			['image', 'Images'],
       ['util', 'Utility'],
+      ['music', 'Music (Only Works at #music)'],
       ['misc','Miscellaneous'],
 
   ])

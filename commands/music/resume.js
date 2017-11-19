@@ -11,9 +11,9 @@ module.exports = class ResumeCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'resume',
-            group: 'misc',
+            group: 'music',
             memberName: 'resume',
-            description: 'Go play.',
+            description: 'Resumes the music if it is paused',
             examples: ['/afk']
         });
     }
@@ -27,7 +27,8 @@ module.exports = class ResumeCommand extends Command {
       const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
       if(userMaxPermission >= cmdPermission)
       {
-        return true;
+        if(msg.channel.name == "music") return true;
+        return false;
       }
       else {
         return false;

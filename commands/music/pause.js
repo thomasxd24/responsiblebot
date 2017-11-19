@@ -11,9 +11,9 @@ module.exports = class PauseCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'pause',
-            group: 'misc',
+            group: 'music',
             memberName: 'pause',
-            description: 'Go play.',
+            description: 'Pause the music',
             examples: ['/afk']
         });
     }
@@ -27,7 +27,8 @@ module.exports = class PauseCommand extends Command {
       const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
       if(userMaxPermission >= cmdPermission)
       {
-        return true;
+        if(msg.channel.name == "music") return true;
+        return false;
       }
       else {
         return false;
