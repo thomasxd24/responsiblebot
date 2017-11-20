@@ -1,4 +1,4 @@
-
+const permissionRole = "DedicatedMember";
 const { Command } = require('discord.js-commando');
 
 const config = require("../../config.json");
@@ -14,16 +14,33 @@ module.exports = class MemeCommand extends Command {
         });
     }
 
+    hasPermission(msg) {
+      const userMaxPermission = msg.member.roles.sort((r1, r2) => r2.calculatedPosition - r1.calculatedPosition).first().calculatedPosition;
+      if(msg.guild.roles.find("name",permissionRole) == null)
+      {
+        return false;
+      }
+      const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
+      if(userMaxPermission >= cmdPermission)
+      {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
 // Credit : Unsplash source API. (Do not remove this comment.)
     run(message) {
-      var request = require('request');
+      var request = require('superagent');
       request.get(`https://api.imgur.com/3/g/memes/viral/${Math.floor((Math.random() * 8) + 1)}`) // 20 Memes per page, 160 Memes
-    .set('Authorization', 'Client-ID ' + config.api_keys_imgur)
+    .set('Authorization', 'Client-ID ' + config.api_key_imgur)
     .end(function (err, result) {
       if (!err && !result.body.data.error) {
         message.channel.send(result.body.data[Math.floor((Math.random() * 20) + 1)].link)
       } else {
         console.log(result.body.data.error);
+        console.log(config.api_key_imgur);
       }
     })
 

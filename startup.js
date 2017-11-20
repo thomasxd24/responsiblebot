@@ -122,11 +122,18 @@ client
 				global.afk.delete(message.author.id);
 				message.channel.send(`<@${message.author.id}> is no longer afk.`)
 			}
-			if(global.afk.get(message.mentions.users.first().id))
+			if(global.afk.get(message.mentions.users.first()))
 			{
 				if(global.afk.get(message.mentions.users.first().id)['afkmsg'] != "")
-				message.channel.send(`<@${message.mentions.users.first().id}> is currently afk for : ${global.afk.get(message.mentions.users.first().id)['afkmsg']}.`)
-			}
+        {
+          message.reply(`<@${message.mentions.users.first().id}> is currently afk for: ${global.afk.get(message.mentions.users.first().id)['afkmsg']}.`)
+        }
+        else {
+          message.reply(`<@${message.mentions.users.first().id}> is currently afk.`)
+        }
+      }
+
+
 		}
 
 

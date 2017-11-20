@@ -54,7 +54,7 @@ module.exports = class AFKCommand extends Command {
       } else {
         let afk = {afk : true , afkmsg : reason.toString() };
         console.log(global.afk.set(msg.author.id,afk));
-        msg.channel.send(`<@${msg.author.id}> is currently afk for : ${reason.toString()}`);
+        msg.channel.send(`<@${msg.author.id}> is currently afk for: ${reason.toString()}`);
       }
 
 
