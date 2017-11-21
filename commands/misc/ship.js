@@ -28,6 +28,6 @@ module.exports = class ShipCommand extends Command {
     }
 
     run(msg) {
-      msg.channel.send("I ship "+message.guild.members.random().user.username+" and "+message.guild.members.random().user.username)
+      msg.channel.send("I ship "+msg.guild.members.random().user.username+" and "+msg.guild.members.random().user.username)
     }
 };
