@@ -37,11 +37,11 @@ module.exports = class ResumeCommand extends Command {
 
     async run(msg) {
 			const serverQueue = queue.get(msg.guild.id);
-			if (!serverQueue) return msg.channel.send('There is nothing playing.');
-		return msg.channel.send(`
-__**Song queue:**__
-${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
-**Now playing:** ${serverQueue.songs[0].title}
-		`);
+			if (serverQueue && !serverQueue.playing) {
+        serverQueue.playing = true;
+        serverQueue.connection.dispatcher.resume();
+        return msg.channel.send('▶ Resumed the music for you!');
+      }
+  return msg.channel.send('There is nothing playing.');
     }
 };
