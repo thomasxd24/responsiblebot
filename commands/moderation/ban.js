@@ -44,6 +44,6 @@ module.exports = class BanCommand extends Command {
     async run(message,{user,reason}) {
       await user.ban(reason)
     .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
-  message.channel.send(`The ban hammer has spoken for ${user.username || user.id || user}'s responsibility for reason "${reason}" issued by ${message.member.displayName} \n https://i.imgur.com/O3DHIA5.gif`);
+  message.channel.send(`The ban hammer has spoken for ${user.username}'s responsibility for reason "${reason}" issued by ${message.member.displayName} \n https://i.imgur.com/O3DHIA5.gif`);
     }
 };

@@ -7,15 +7,14 @@ const queue = global.queue;
 const config = require("../../config.json");
 const youtube = new YouTube(config.GOOGLE_API_KEY);
 
-module.exports = class StopCommand extends Command {
+module.exports = class LoopCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'stop',
-            group: 'misc',
-            memberName: 'stop',
-            description: 'Stops the bot and empty the whole queue',
-            examples: ['/afk']
-
+            name: 'loop',
+            group: 'music',
+            memberName: 'loop',
+            description: 'Loop the currently',
+            examples: ['/loop']
         });
     }
 
@@ -36,11 +35,18 @@ module.exports = class StopCommand extends Command {
       }
     }
 
-    async run(msg) {
+    async run(msg,{link}) {
 			const serverQueue = queue.get(msg.guild.id);
-      if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
-if (!serverQueue) return msg.channel.send('There is nothing playing that I could stop for you.');
-serverQueue.songs = [];
-serverQueue.connection.dispatcher.end('Stop command has been used!');
+			if (!serverQueue) return msg.channel.send('There is nothing playing.');
+      if(serverQueue.loop)
+      {
+        serverQueue.loop = false;
+        msg.channel.send(`:repeat_one: Disabled!`);
+      }
+      else {
+        serverQueue.loop = true;
+        msg.channel.send(`:repeat_one: Enabled!`);
+      }
+
     }
 };

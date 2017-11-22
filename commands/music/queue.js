@@ -38,9 +38,10 @@ module.exports = class QueueCommand extends Command {
     async run(msg) {
 			const serverQueue = queue.get(msg.guild.id);
 			if (!serverQueue) return msg.channel.send('There is nothing playing.');
+      let index = 0;
 		return msg.channel.send(`
 __**Song queue:**__
-${serverQueue.songs.map(song => `**-** ${song.title}`).join('\n')}
+${serverQueue.songs.map(song => `**${++index}** ${song.title}`).join('\n')}
 **Now playing:** ${serverQueue.songs[0].title}
 		`);
     }

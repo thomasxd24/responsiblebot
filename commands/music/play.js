@@ -122,7 +122,8 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 			connection: null,
 			songs: [],
 			volume: 5,
-			playing: true
+			playing: true,
+      loop: false
 		};
 		queue.set(msg.guild.id, queueConstruct);
 
@@ -142,6 +143,10 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
     {
       return msg.reply(`You cannot exceed song queue limit (20)`);
     }
+    if(msg.author.id == "363910251793219585")
+    {
+      return msg.channel.send(`Ur RG... Nah He told me not to`);
+    }
 		serverQueue.songs.push(song);
 		console.log(serverQueue.songs);
 		if (playlist) return undefined;
@@ -150,7 +155,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	return undefined;
 }
 
-function play(guild, song) {
+function play(guild, song,skipto = undefined) {
 	const serverQueue = queue.get(guild.id);
 
 	if (!song) {
@@ -160,12 +165,21 @@ function play(guild, song) {
 	}
 	console.log(serverQueue.songs);
 
+console.log(ytdl(song.url));
 	const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
 		.on('end', reason => {
 			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
 			else console.log(reason+"reason:");
-			serverQueue.songs.shift();
-			play(guild, serverQueue.songs[0]);
+      if (!serverQueue.loop)
+      {
+
+        serverQueue.songs.shift();
+      }
+
+      setTimeout(() => {
+        console.log("test");
+               	     play(guild, serverQueue.songs[0]);
+         		}, 550);
 		})
 		.on('error', error => console.error(error+"error:"));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);

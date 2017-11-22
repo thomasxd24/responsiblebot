@@ -58,16 +58,16 @@ client
 
 		// let punishlevel = {punishtype : , punishduration: };
     client.user.setGame(`with responsibility`);
-    var anti_spam = require("./anti-spam.js");
-    anti_spam(client, {
-      warnBuffer: 5, //Maximum amount of messages allowed to send in the interval time before getting warned.
-      maxBuffer: 8, // Maximum amount of messages allowed to send in the interval time before getting banned.
-      interval: 1000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
-      warningMessage: "refrain from spamming or you shall be punished accordingly.", // Warning message send to the user indicating they are going to fast.
-      banMessage: "has been muted for spamming for 5 minutes, anyone else?", // Ban message, always tags the banned user in front of it.
-      maxDuplicatesWarning : 3, // Maximum amount of duplicate messages a user can send in a timespan before getting warned
-      maxDuplicatesBan : 5, // Maximum amount of duplicate messages a user can send in a timespan before getting banned
-  });
+    // var anti_spam = require("./anti-spam.js");
+  //   anti_spam(client, {
+  //     warnBuffer: 5, //Maximum amount of messages allowed to send in the interval time before getting warned.
+  //     maxBuffer: 8, // Maximum amount of messages allowed to send in the interval time before getting banned.
+  //     interval: 1000, // Amount of time in ms users can send a maximum of the maxBuffer variable before getting banned.
+  //     warningMessage: "refrain from spamming or you shall be punished accordingly.", // Warning message send to the user indicating they are going to fast.
+  //     banMessage: "has been muted for spamming for 5 minutes, anyone else?", // Ban message, always tags the banned user in front of it.
+  //     maxDuplicatesWarning : 3, // Maximum amount of duplicate messages a user can send in a timespan before getting warned
+  //     maxDuplicatesBan : 5, // Maximum amount of duplicate messages a user can send in a timespan before getting banned
+  // });
     console.log(`Client ready; logged in as ${client.user.username}#${client.user.discriminator} (${client.user.id})`);
 	})
 	.on('disconnect', () => { console.warn('Disconnected!'); })

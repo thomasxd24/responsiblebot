@@ -9,18 +9,21 @@ const youtube = new YouTube(config.GOOGLE_API_KEY);
 const queue = global.queue;
 
 
-module.exports = class SkipCommand extends Command {
+module.exports = class SkiptoCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'skip',
+            name: 'skipto',
             group: 'music',
-            memberName: 'skip',
+            memberName: 'skipto',
             description: 'Skips Now Playing',
             examples: ['/afk'],
-            throttling: {
-              usages: 1,
-              duration: 5
-            }
+            args: [
+                {
+                    key: 'number',
+                    prompt: 'which one would you want to skip to? (Get the queue list in /queue)',
+                    type: 'integer'
+                }
+            ]
 
         });
     }
@@ -42,11 +45,27 @@ module.exports = class SkipCommand extends Command {
       }
     }
 
-    async run(msg,{link}) {
+    async run(msg,{number}) {
 			const serverQueue = queue.get(msg.guild.id);
 			if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
 		if (!serverQueue) return msg.channel.send('There is nothing playing that I could skip for you.');
-		serverQueue.connection.dispatcher.end('Skip command has been used!');
+    if(0 < number <= serverQueue.songs.length)
+    {
+      if(number == 1)
+      {
+        return msg.channel.send('You cannot skip to the currently song!');
+      }
+      if(number == 2)
+      {
+        serverQueue.connection.dispatcher.end('Skip command has been used!');
+      }
+      serverQueue.songs.splice(1,number-2);
+      serverQueue.connection.dispatcher.end('Skip command has been used!');
+    }
+    else {
+      return msg.channel.send('Illegal number!');
+    }
+
 
 
 

@@ -21,7 +21,7 @@
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "ffmpeg-binaries": "^3.2.2-3",
-    "moment": "^2.19.1",
+    "moment": "^2.19.2",
     "opusscript": "0.0.4",
     "prism-media": "github:hydrabolt/prism-media",
     "request": "^2.83.0",
