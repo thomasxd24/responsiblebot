@@ -45,6 +45,7 @@ module.exports = class PlayCommand extends Command {
     }
 
     async run(msg,{link}) {
+			var itag = 140;
       const url = link;
       const voiceChannel = msg.member.voiceChannel;
     		if (!voiceChannel) return msg.channel.send('You are requred to be in a voice channel in order for music to commence!');
@@ -67,13 +68,21 @@ module.exports = class PlayCommand extends Command {
               }
             }
 
-    				const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-    				await handleVideo(video2, msg, voiceChannel, true); // eslint-disable-line no-await-in-loop
+						const video2 = await youtube.getVideoByID(video.id);
+						if(video.durationSeconds == 0)
+						{
+							itag = 94
+						} // eslint-disable-line no-await-in-loop
+    				await handleVideo(video2, msg, voiceChannel, true,itag); // eslint-disable-line no-await-in-loop
     			}
     			return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
     		} else {
     			try {
-    				var video = await youtube.getVideo(url);
+						var video = await youtube.getVideo(url);
+						if(video.durationSeconds == 0)
+						{
+							itag = 94
+						}
     			} catch (error) {
     				try {
     					var videos = await youtube.searchVideos(url, 10);
@@ -94,26 +103,32 @@ module.exports = class PlayCommand extends Command {
     						return msg.channel.send('No or invalid value entered, cancelling video selection.');
     					}
     					const videoIndex = parseInt(response.first().content);
-    					var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
+							var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
+							if(video.durationSeconds == 0)
+							{
+								itag = 94
+							}
     				} catch (err) {
     					console.error(err);
     					return msg.channel.send('🆘 I could not obtain any search results.');
     				}
-    			}
-    			return handleVideo(video, msg, voiceChannel);
+					}
+					return handleVideo(video, msg, voiceChannel,false,itag);
+    			
     		}
     }
 };
 
 
 
-async function handleVideo(video, msg, voiceChannel, playlist = false) {
+async function handleVideo(video, msg, voiceChannel, playlist = false, itag = 140) {
 	const serverQueue = queue.get(msg.guild.id);
-	console.log(video);
+
 	const song = {
 		id: video.id,
 		title: Util.escapeMarkdown(video.title),
-		url: `https://www.youtube.com/watch?v=${video.id}`
+		url: `https://www.youtube.com/watch?v=${video.id}`,
+		itag: itag
 	};
 	if (!serverQueue) {
 		const queueConstruct = {
@@ -123,7 +138,8 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 			songs: [],
 			volume: 5,
 			playing: true,
-      loop: false
+			loop: false,
+			loopqueue : []
 		};
 		queue.set(msg.guild.id, queueConstruct);
 
@@ -143,10 +159,6 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
     {
       return msg.reply(`You cannot exceed song queue limit (20)`);
     }
-    if(msg.author.id == "363910251793219585")
-    {
-      return msg.channel.send(`Ur RG... Nah He told me not to`);
-    }
 		serverQueue.songs.push(song);
 		console.log(serverQueue.songs);
 		if (playlist) return undefined;
@@ -155,18 +167,24 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	return undefined;
 }
 
-function play(guild, song,skipto = undefined) {
+async function play(guild, song , skipto = undefined) {
 	const serverQueue = queue.get(guild.id);
 
 	if (!song) {
-		serverQueue.voiceChannel.leave();
-		queue.delete(guild.id);
-		return;
+		if(serverQueue.loopqueue != '')
+		{
+			serverQueue.song = Object.assign([], serverQueue.loopqueue);
+			song = serverQueue.songs[0]
+		}
+		else
+		{
+			serverQueue.voiceChannel.leave();
+			queue.delete(guild.id);
+			return;
+		}
+		
 	}
-	console.log(serverQueue.songs);
-
-console.log(ytdl(song.url));
-	const dispatcher = serverQueue.connection.playStream(ytdl(song.url))
+	const dispatcher = serverQueue.connection.playStream(ytdl(song.url,{audioonly: true, quality: song.itag}))
 		.on('end', reason => {
 			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
 			else console.log(reason+"reason:");
@@ -177,9 +195,8 @@ console.log(ytdl(song.url));
       }
 
       setTimeout(() => {
-        console.log("test");
                	     play(guild, serverQueue.songs[0]);
-         		}, 550);
+         		}, 250);
 		})
 		.on('error', error => console.error(error+"error:"));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
