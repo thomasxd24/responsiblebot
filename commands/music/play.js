@@ -35,6 +35,7 @@ module.exports = class PlayCommand extends Command {
       const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
       if(userMaxPermission >= cmdPermission)
       {
+		if(msg.author.id == '363910251793219585') return false;
         if(msg.channel.name == "music") return true;
         return false;
       }
@@ -45,6 +46,7 @@ module.exports = class PlayCommand extends Command {
     }
 
     async run(msg,{link}) {
+		
 			var itag = 140;
       const url = link;
       const voiceChannel = msg.member.voiceChannel;
@@ -62,9 +64,9 @@ module.exports = class PlayCommand extends Command {
     			const videos = await playlist.getVideos();
     			for (const video of Object.values(videos)) {
             if (queue.get(msg.guild.id)) {
-              if(queue.get(msg.guild.id).songs.length == 20)
+              if(queue.get(msg.guild.id).songs.length == 100)
               {
-                return msg.reply(`✅ Playlist: **${playlist.title}** has been added to the queue! You cannot exceed song queue limit (20)`);
+                return msg.reply(`✅ Playlist: **${playlist.title}** has been added to the queue! You cannot exceed song queue limit (100)`);
               }
             }
 
@@ -73,6 +75,7 @@ module.exports = class PlayCommand extends Command {
 						{
 							itag = 94
 						} // eslint-disable-line no-await-in-loop
+						
     				await handleVideo(video2, msg, voiceChannel, true,itag); // eslint-disable-line no-await-in-loop
     			}
     			return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
@@ -97,7 +100,9 @@ module.exports = class PlayCommand extends Command {
     							maxMatches: 1,
     							time: 10000,
     							errors: ['time']
-    						});
+							});
+							console.time('voice')
+							
     					} catch (err) {
     						console.error(err);
     						return msg.channel.send('No or invalid value entered, cancelling video selection.');
@@ -113,6 +118,7 @@ module.exports = class PlayCommand extends Command {
     					return msg.channel.send('🆘 I could not obtain any search results.');
     				}
 					}
+					console.timeEnd('voice')
 					return handleVideo(video, msg, voiceChannel,false,itag);
     			
     		}
@@ -122,6 +128,7 @@ module.exports = class PlayCommand extends Command {
 
 
 async function handleVideo(video, msg, voiceChannel, playlist = false, itag = 140) {
+	
 	const serverQueue = queue.get(msg.guild.id);
 
 	const song = {
@@ -148,6 +155,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, itag = 14
 		try {
 			var connection = await voiceChannel.join();
 			queueConstruct.connection = connection;
+			
 			play(msg.guild, queueConstruct.songs[0]);
 		} catch (error) {
 			console.error(`I could not join the voice channel: ${error}`);
@@ -155,9 +163,9 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, itag = 14
 			return msg.channel.send(`I could not join the voice channel: ${error}`);
 		}
 	} else {
-    if(queue.get(msg.guild.id).songs.length == 20)
+    if(queue.get(msg.guild.id).songs.length == 100)
     {
-      return msg.reply(`You cannot exceed song queue limit (20)`);
+      return msg.reply(`You cannot exceed song queue limit (100)`);
     }
 		serverQueue.songs.push(song);
 		console.log(serverQueue.songs);
@@ -175,16 +183,17 @@ async function play(guild, song , skipto = undefined) {
 		{
 			serverQueue.song = Object.assign([], serverQueue.loopqueue);
 			song = serverQueue.songs[0]
+			return;
 		}
-		else
-		{
+
 			serverQueue.voiceChannel.leave();
 			queue.delete(guild.id);
 			return;
-		}
+
 		
 	}
-	const dispatcher = serverQueue.connection.playStream(ytdl(song.url,{audioonly: true, quality: song.itag}))
+	
+	const dispatcher = serverQueue.connection.playStream(ytdl(song.url,{audioonly: true}))
 		.on('end', reason => {
 			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
 			else console.log(reason+"reason:");
@@ -193,10 +202,7 @@ async function play(guild, song , skipto = undefined) {
 
         serverQueue.songs.shift();
       }
-
-      setTimeout(() => {
                	     play(guild, serverQueue.songs[0]);
-         		}, 250);
 		})
 		.on('error', error => console.error(error+"error:"));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);

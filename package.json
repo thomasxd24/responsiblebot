@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "chess.js": "^0.10.2",
+    "discord-rpc": "^3.0.0-beta.3",
     "discord.js": "^11.2.1",
     "discord.js-commando": "^0.9.0",
     "ejs": "^2.5.7",

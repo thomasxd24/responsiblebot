@@ -34,6 +34,7 @@ module.exports = class SkipCommand extends Command {
       const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
       if(userMaxPermission >= cmdPermission)
       {
+        if(msg.author.id == '363910251793219585') return false;
         if(msg.channel.name == "music") return true;
         return "Test";
       }
