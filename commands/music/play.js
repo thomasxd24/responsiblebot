@@ -47,7 +47,7 @@ module.exports = class PlayCommand extends Command {
 
     async run(msg,{link}) {
 		
-			var itag = 140;
+			var itag = 18;
       const url = link;
       const voiceChannel = msg.member.voiceChannel;
     		if (!voiceChannel) return msg.channel.send('You are requred to be in a voice channel in order for music to commence!');
@@ -193,7 +193,7 @@ async function play(guild, song , skipto = undefined) {
 		
 	}
 	
-	const dispatcher = serverQueue.connection.playStream(ytdl(song.url,{audioonly: true}))
+	const dispatcher = serverQueue.connection.playStream(ytdl(song.url,{audioonly: true,quality:itag}))
 		.on('end', reason => {
 			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
 			else console.log(reason+"reason:");
