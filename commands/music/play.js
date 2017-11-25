@@ -127,7 +127,7 @@ module.exports = class PlayCommand extends Command {
 
 
 
-async function handleVideo(video, msg, voiceChannel, playlist = false, itag = 140) {
+async function handleVideo(video, msg, voiceChannel, playlist = false, itag = 18) {
 	
 	const serverQueue = queue.get(msg.guild.id);
 
@@ -193,7 +193,7 @@ async function play(guild, song , skipto = undefined) {
 		
 	}
 	
-	const dispatcher = serverQueue.connection.playStream(ytdl(song.url,{audioonly: true,quality:itag}))
+	const dispatcher = serverQueue.connection.playStream(ytdl(song.url,{audioonly: true,quality:song.itag}),{bitrate:96000,passes:2})
 		.on('end', reason => {
 			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
 			else console.log(reason+"reason:");
