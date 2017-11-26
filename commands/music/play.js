@@ -201,8 +201,9 @@ async function play(guild, song , skipto = undefined) {
       {
 
         serverQueue.songs.shift();
-      }
-               	     play(guild, serverQueue.songs[0]);
+	  }
+	  setTimeout(() => {play(guild, serverQueue.songs[0]);}, 100)
+               	     
 		})
 		.on('error', error => console.error(error+"error:"));
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
