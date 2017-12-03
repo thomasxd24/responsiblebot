@@ -57,7 +57,7 @@ client
 
 
 		// let punishlevel = {punishtype : , punishduration: };
-    client.user.setGame(`with responsibility`);
+    client.user.setActivity(`with responsibility`);
     // var anti_spam = require("./anti-spam.js");
   //   anti_spam(client, {
   //     warnBuffer: 5, //Maximum amount of messages allowed to send in the interval time before getting warned.
