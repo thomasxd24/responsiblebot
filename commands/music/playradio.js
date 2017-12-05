@@ -42,6 +42,12 @@ module.exports = class PlayRadioCommand extends Command {
                 })
             })
             .catch(console.error);
+            var getsong = setInterval(() => {
+                request("http://api.truckers.fm/lastplayed/1",function (error, response, body) {
+                    this.client.user.setActivity(JSON.parse(body)[0].song + ' - ' + JSON.parse(body)[0].artist,{type: "LISTENING"})
+                  });
+                
+            }, 1000);
 
     }
 };
