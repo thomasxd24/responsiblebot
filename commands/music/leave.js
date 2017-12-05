@@ -7,13 +7,13 @@ const queue = global.queue;
 const config = require("../../config.json");
 const youtube = new YouTube(config.GOOGLE_API_KEY);
 
-module.exports = class LoopqueueCommand extends Command {
+module.exports = class LeaveCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'loopqueue',
+            name: 'leave',
             group: 'music',
-            memberName: 'loopqueue',
-            description: 'Loop the currently queue',
+            memberName: 'leave',
+            description: 'leave the channel',
             examples: ['/loopqueue']
         });
     }
