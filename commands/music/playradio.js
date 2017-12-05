@@ -34,6 +34,7 @@ module.exports = class PlayRadioCommand extends Command {
     }
 
     async run(msg) {
+        const userclient = this.client.user;
 		const channel = msg.member.voiceChannel;
         if (!channel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
             msg.member.voiceChannel.join().then(connection => {
@@ -42,12 +43,13 @@ module.exports = class PlayRadioCommand extends Command {
                 })
             })
             .catch(console.error);
-            var getsong = setInterval(() => {
+            global.getsong = setInterval(() => {
                 request("http://api.truckers.fm/lastplayed/1",function (error, response, body) {
-                    this.client.user.setActivity(JSON.parse(body)[0].song + ' - ' + JSON.parse(body)[0].artist,{type: "LISTENING"})
+                    userclient.setActivity(JSON.parse(body)[0].song + ' - ' + JSON.parse(body)[0].artist,{type: "LISTENING"})
+
                   });
                 
-            }, 1000);
+            }, 5000);
 
     }
 };

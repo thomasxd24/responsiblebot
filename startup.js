@@ -10,6 +10,7 @@ const punishlevel = new discord.Collection();
 const express = require('express');
 const app = express();
 const http = require('http');
+global.getsong = null
 global.queue = new discord.Collection();
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku

@@ -1,3 +1,5 @@
+
+
 const permissionRole = "BeginningGamer";
 const { Command } = require('discord.js-commando');
 const { Util } = require('discord.js');
@@ -40,7 +42,13 @@ module.exports = class LeaveCommand extends Command {
         const serverQueue = queue.get(msg.guild.id);
   if (!serverQueue)
   {
-    return msg.guild.voiceChannel.leave();
+    msg.guild.voiceConnection.channel.leave();
+    if(global.getsong)
+    {
+        clearInterval(global.getsong)
+        this.client.user.setActivity(`with responsibility`);
+    }
+    return
   } 
   serverQueue.songs = [];
   serverQueue.connection.dispatcher.end('Stop command has been used!');
