@@ -182,7 +182,7 @@ async function play(guild, song , skipto = undefined) {
 		{
 			serverQueue.song = Object.assign([], serverQueue.loopqueue);
 			song = serverQueue.songs[0]
-			return;
+			
 		}
 
 			serverQueue.voiceChannel.leave();
