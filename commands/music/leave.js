@@ -44,7 +44,7 @@ module.exports = class LoopqueueCommand extends Command {
   } 
   serverQueue.songs = [];
   serverQueue.connection.dispatcher.end('Stop command has been used!');
-      }
+      
 
     }
 };
