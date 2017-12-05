@@ -4,21 +4,14 @@ const { Util } = require('discord.js');
 const request = require('request');
 const queue = global.queue;
 
-module.exports = class PlayURLCommand extends Command {
+module.exports = class PlayRadioCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'playurl',
+            name: 'playradio',
             group: 'music',
-            memberName: 'playurl',
+            memberName: 'playradio',
             description: 'play a stream in url',
-            examples: ['/playurl'],
-            args: [
-                {
-                    key: 'link',
-                    prompt: 'What are u trying to play?',
-                    type: 'string'
-                }
-            ]
+            examples: ['/playurl']
         });
     }
 
@@ -26,7 +19,7 @@ module.exports = class PlayURLCommand extends Command {
       const minRole = msg.guild.roles.find("name",permissionRole)
       if(minRole == null)
       {
-        return false;
+        return true;
       }
       
       if(msg.member.highestRole.comparePositionTo(minRole) >= 0)
@@ -40,11 +33,11 @@ module.exports = class PlayURLCommand extends Command {
   
     }
 
-    async run(msg,{link}) {
+    async run(msg) {
 		const channel = msg.member.voiceChannel;
         if (!channel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');
             msg.member.voiceChannel.join().then(connection => {
-                connection.playStream(request(link)).on('error', (err) => {
+                connection.playStream(request("https://radio.truckers.fm")).on('error', (err) => {
                     console.log(err)
                 })
             })
