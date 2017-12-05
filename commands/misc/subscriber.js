@@ -12,13 +12,13 @@ module.exports = class subscriberCommand extends Command {
     }
 
     hasPermission(msg) {
-      const userMaxPermission = msg.member.roles.sort((r1, r2) => r2.calculatedPosition - r1.calculatedPosition).first().calculatedPosition;
-      if(msg.guild.roles.find("name",permissionRole) == null)
+      const minRole = msg.guild.roles.find("name",permissionRole)
+      if(minRole == null)
       {
         return false;
       }
-      const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
-      if(userMaxPermission >= cmdPermission)
+      
+      if(msg.member.highestRole.comparePositionTo(minRole) >= 0)
       {
         return true;
       }
@@ -30,7 +30,7 @@ module.exports = class subscriberCommand extends Command {
     run(msg) {
       if(msg.author.id == "186824408227119104" || msg.author.id == "325644122063110156")
       {
-        let role1 = msg.guild.roles.find("name", "DedicatedMember");
+        let role1 = msg.guild.roles.find("name", "BeginningGamer");
         let role2 = msg.guild.roles.find("name", "Subscriber");
 
   // Let's pretend you mentioned the user you want to add a role to (!addrole @user Role Name):

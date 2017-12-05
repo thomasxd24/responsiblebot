@@ -1,4 +1,4 @@
-const permissionRole = "DedicatedMember";
+const permissionRole = "BeginningGamer";
 const { Command } = require('discord.js-commando');
 const { Util } = require('discord.js');
 const YouTube = require('simple-youtube-api');
@@ -19,21 +19,21 @@ module.exports = class PauseCommand extends Command {
     }
 
     hasPermission(msg) {
-      const userMaxPermission = msg.member.roles.sort((r1, r2) => r2.calculatedPosition - r1.calculatedPosition).first().calculatedPosition;
-      if(msg.guild.roles.find("name",permissionRole) == null)
+      const minRole = msg.guild.roles.find("name",permissionRole)
+      if(minRole == null)
       {
         return false;
       }
-      const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
-      if(userMaxPermission >= cmdPermission)
+      
+      if(msg.member.highestRole.comparePositionTo(minRole) >= 0)
       {
-        if(msg.author.id == '363910251793219585') return false;
         if(msg.channel.name == "music") return true;
-        return false;
+        return "You have to run the command #music in order to play music";
       }
       else {
         return false;
       }
+  
     }
 
     async run(msg) {

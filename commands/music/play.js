@@ -1,4 +1,4 @@
-const permissionRole = "DedicatedMember";
+const permissionRole = "BeginningGamer";
 const { Command } = require('discord.js-commando');
 const { Util } = require('discord.js');
 const YouTube = require('simple-youtube-api');
@@ -27,21 +27,20 @@ module.exports = class PlayCommand extends Command {
     }
 
     hasPermission(msg) {
-      const userMaxPermission = msg.member.roles.sort((r1, r2) => r2.calculatedPosition - r1.calculatedPosition).first().calculatedPosition;
-      if(msg.guild.roles.find("name",permissionRole) == null)
-      {
-        return false;
-      }
-      const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
-      if(userMaxPermission >= cmdPermission)
-      {
-		if(msg.author.id == '363910251793219585') return false;
-        if(msg.channel.name == "music") return true;
-        return false;
-      }
-      else {
-        return false;
-      }
+		const minRole = msg.guild.roles.find("name",permissionRole)
+		if(minRole == null)
+		{
+		  return false;
+		}
+		
+		if(msg.member.highestRole.comparePositionTo(minRole) >= 0)
+		{
+		  if(msg.channel.name == "music") return true;
+		  return "You have to run the command #music in order to play music";
+		}
+		else {
+		  return false;
+		}
 
     }
 
@@ -97,10 +96,11 @@ module.exports = class PlayCommand extends Command {
     					// eslint-disable-next-line max-depth
     					try {
     						var response = await msg.channel.awaitMessages(msg2 => msg2.content > 0 && msg2.content < 11, {
-    							maxMatches: 1,
+    							max:1,
     							time: 10000,
     							errors: ['time']
-							});
+							}
+						);
 							console.time('voice')
 							
     					} catch (err) {
@@ -168,7 +168,6 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, itag = 18
       return msg.reply(`You cannot exceed song queue limit (100)`);
     }
 		serverQueue.songs.push(song);
-		console.log(serverQueue.songs);
 		if (playlist) return undefined;
 		else return msg.channel.send(`✅ **${song.title}** has been added to the queue!`);
 	}
@@ -196,13 +195,13 @@ async function play(guild, song , skipto = undefined) {
 	const dispatcher = serverQueue.connection.playStream(ytdl(song.url,{audioonly: true,quality:song.itag}),{bitrate:96000,passes:2})
 		.on('end', reason => {
 			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
-			else console.log(reason+"reason:");
+			else console.log(reason);
       if (!serverQueue.loop)
       {
 
         serverQueue.songs.shift();
 	  }
-	  setTimeout(() => {play(guild, serverQueue.songs[0]);}, 100)
+	  play(guild, serverQueue.songs[0])
                	     
 		})
 		.on('error', error => console.error(error+"error:"));

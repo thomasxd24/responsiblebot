@@ -24,13 +24,13 @@ const permissionRole = "Mod";
       }
 
       hasPermission(msg) {
-        const userMaxPermission = msg.member.roles.sort((r1, r2) => r2.calculatedPosition - r1.calculatedPosition).first().calculatedPosition;
-        if(msg.guild.roles.find("name",permissionRole) == null)
+        const minRole = msg.guild.roles.find("name",permissionRole)
+        if(minRole == null)
         {
           return false;
         }
-        const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
-        if(userMaxPermission >= cmdPermission)
+        
+        if(msg.member.highestRole.comparePositionTo(minRole) >= 0)
         {
           return true;
         }

@@ -29,19 +29,19 @@ module.exports = class PunishCommand extends Command {
     }
 
     hasPermission(msg) {
-      const userMaxPermission = msg.member.roles.sort((r1, r2) => r2.calculatedPosition - r1.calculatedPosition).first().calculatedPosition;
-      if(msg.guild.roles.find("name",permissionRole) == null)
-      {
-        return false;
-      }
-      const cmdPermission = msg.guild.roles.find("name",permissionRole).calculatedPosition;
-      if(userMaxPermission >= cmdPermission)
-      {
-        return true;
-      }
-      else {
-        return false;
-      }
+        const minRole = msg.guild.roles.find("name",permissionRole)
+        if(minRole == null)
+        {
+          return false;
+        }
+        
+        if(msg.member.highestRole.comparePositionTo(minRole) >= 0)
+        {
+          return true;
+        }
+        else {
+          return false;
+        }
     }
 
     async run(message, { user, reason }) {
