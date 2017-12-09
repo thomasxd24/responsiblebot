@@ -195,7 +195,7 @@ async function play(queue,guild, song , skipto = undefined) {
 		
 	}
 	
-	const dispatcher = serverQueue.connection.playStream(ytdl(song.url,{audioonly: true,quality:song.itag}),{bitrate:96000,passes:2})
+	const dispatcher = serverQueue.connection.playStream(ytdl(song.url,{audioonly: true,quality:song.itag}),{bitrate:96000,passes:1})
 		.on('end', reason => {
 			if (reason === 'Stream is not generating quickly enough.') console.log('Song ended.');
 			else console.log(reason);
