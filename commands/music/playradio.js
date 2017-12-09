@@ -2,7 +2,7 @@ const permissionRole = "BeginningGamer";
 const { Command } = require('discord.js-commando');
 const { Util } = require('discord.js');
 const request = require('request');
-const queue = global.queue;
+
 
 module.exports = class PlayRadioCommand extends Command {
     constructor(client) {
@@ -34,6 +34,7 @@ module.exports = class PlayRadioCommand extends Command {
     }
 
     async run(msg) {
+        const queue = this.client.queue;
         const userclient = this.client.user;
 		const channel = msg.member.voiceChannel;
         if (!channel) return msg.channel.send(':warning:  |  **You are not on a voice channel.**');

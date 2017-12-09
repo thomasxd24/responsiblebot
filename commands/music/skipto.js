@@ -6,7 +6,7 @@ const ytdl = require('ytdl-core');
 
 const config = require("../../config.json");
 const youtube = new YouTube(config.GOOGLE_API_KEY);
-const queue = global.queue;
+
 
 
 module.exports = class SkiptoCommand extends Command {
@@ -47,6 +47,7 @@ module.exports = class SkiptoCommand extends Command {
     }
 
     async run(msg,{number}) {
+      const queue = this.client.queue;
 			const serverQueue = queue.get(msg.guild.id);
 			if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
 		if (!serverQueue) return msg.channel.send('There is nothing playing that I could skip for you.');

@@ -5,7 +5,7 @@ const { Command } = require('discord.js-commando');
 const { Util } = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
-const queue = global.queue;
+
 const config = require("../../config.json");
 const youtube = new YouTube(config.GOOGLE_API_KEY);
 
@@ -39,6 +39,7 @@ module.exports = class LeaveCommand extends Command {
     }
 
     async run(msg,{link}) {
+      const queue = this.client.queue;
         const serverQueue = queue.get(msg.guild.id);
   if (!serverQueue)
   {

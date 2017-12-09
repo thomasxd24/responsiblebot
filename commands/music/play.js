@@ -3,7 +3,7 @@ const { Command } = require('discord.js-commando');
 const { Util } = require('discord.js');
 const YouTube = require('simple-youtube-api');
 const ytdl = require('ytdl-core');
-var queue = global.queue;
+
 const config = require("../../config.json");
 const youtube = new YouTube(config.GOOGLE_API_KEY);
 
@@ -25,7 +25,6 @@ module.exports = class PlayCommand extends Command {
             ]
         });
     }
-
     hasPermission(msg) {
 		const minRole = msg.guild.roles.find("name",permissionRole)
 		if(minRole == null)
@@ -36,7 +35,7 @@ module.exports = class PlayCommand extends Command {
 		if(msg.member.highestRole.comparePositionTo(minRole) >= 0)
 		{
 		  if(msg.channel.name == "music") return true;
-		  return "You have to run the command #music in order to play music";
+		  return "You have to run the command in #music in order to play music";
 		}
 		else {
 		  return false;
@@ -45,6 +44,8 @@ module.exports = class PlayCommand extends Command {
     }
 
     async run(msg,{link}) {
+	var queue = this.client.queue;
+	var serverQueue = queue.get(msg.guild.id);
 		
 			var itag = 18;
       const url = link;
@@ -75,7 +76,7 @@ module.exports = class PlayCommand extends Command {
 							itag = 94
 						} // eslint-disable-line no-await-in-loop
 						
-    				await handleVideo(video2, msg, voiceChannel, true,itag); // eslint-disable-line no-await-in-loop
+    				await handleVideo(queue, video2, msg, voiceChannel, true,itag); // eslint-disable-line no-await-in-loop
     			}
     			return msg.channel.send(`✅ Playlist: **${playlist.title}** has been added to the queue!`);
     		} else {
@@ -119,18 +120,21 @@ module.exports = class PlayCommand extends Command {
     				}
 					}
 					console.timeEnd('voice')
-					return handleVideo(video, msg, voiceChannel,false,itag);
+					return handleVideo(queue,video, msg, voiceChannel,false,itag);
     			
     		}
-    }
+	}
+	
+
+	
 };
 
 
 
-async function handleVideo(video, msg, voiceChannel, playlist = false, itag = 18) {
+async function handleVideo(queue, video, msg, voiceChannel, playlist = false, itag = 18) {
 	
-	const serverQueue = queue.get(msg.guild.id);
-
+	
+	var serverQueue = queue.get(msg.guild.id);
 	const song = {
 		id: video.id,
 		title: Util.escapeMarkdown(video.title),
@@ -156,7 +160,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, itag = 18
 			var connection = await voiceChannel.join();
 			queueConstruct.connection = connection;
 			
-			play(msg.guild, queueConstruct.songs[0]);
+			play(queue,msg.guild, queueConstruct.songs[0]);
 		} catch (error) {
 			console.error(`I could not join the voice channel: ${error}`);
 			queue.delete(msg.guild.id);
@@ -174,9 +178,8 @@ async function handleVideo(video, msg, voiceChannel, playlist = false, itag = 18
 	return undefined;
 }
 
-async function play(guild, song , skipto = undefined) {
-	const serverQueue = queue.get(guild.id);
-
+async function play(queue,guild, song , skipto = undefined) {
+	var serverQueue = queue.get(guild.id);
 	if (!song) {
 		if(serverQueue.loopqueue != '')
 		{
@@ -201,7 +204,7 @@ async function play(guild, song , skipto = undefined) {
 
         serverQueue.songs.shift();
 	  }
-	  play(guild, serverQueue.songs[0])
+	  play(queue,guild, serverQueue.songs[0])
                	     
 		})
 		.on('error', error => console.error(error+"error:"));

@@ -6,7 +6,7 @@ const ytdl = require('ytdl-core');
 
 const config = require("../../config.json");
 const youtube = new YouTube(config.GOOGLE_API_KEY);
-const queue = global.queue;
+
 
 
 module.exports = class SkipCommand extends Command {
@@ -26,6 +26,7 @@ module.exports = class SkipCommand extends Command {
     }
 
     hasPermission(msg) {
+      const queue = this.client.queue;
       const minRole = msg.guild.roles.find("name",permissionRole)
       if(minRole == null)
       {

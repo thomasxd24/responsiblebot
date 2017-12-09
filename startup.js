@@ -11,7 +11,7 @@ const express = require('express');
 const app = express();
 const http = require('http');
 global.getsong = null
-global.queue = new discord.Collection();
+
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
 const port = process.env.PORT || 5000;
@@ -42,7 +42,7 @@ const client = new commando.Client({
 	owner: ['186824408227119104','325644122063110156'],
 	commandPrefix: '/'
 });
-
+client.queue = new discord.Collection();
 client
 	.on('error', console.error)
 	.on('warn', console.warn)
