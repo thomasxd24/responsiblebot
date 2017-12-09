@@ -26,7 +26,7 @@ module.exports = class SkipCommand extends Command {
     }
 
     hasPermission(msg) {
-      const queue = this.client.queue;
+      
       const minRole = msg.guild.roles.find("name",permissionRole)
       if(minRole == null)
       {
@@ -44,7 +44,9 @@ module.exports = class SkipCommand extends Command {
   
     }
 
+
     async run(msg,{link}) {
+      const queue = this.client.queue;
 			const serverQueue = queue.get(msg.guild.id);
 			if (!msg.member.voiceChannel) return msg.channel.send('You are not in a voice channel!');
 		if (!serverQueue) return msg.channel.send('There is nothing playing that I could skip for you.');
