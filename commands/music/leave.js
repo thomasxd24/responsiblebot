@@ -43,16 +43,19 @@ module.exports = class LeaveCommand extends Command {
         const serverQueue = queue.get(msg.guild.id);
   if (!serverQueue)
   {
-    msg.guild.voiceConnection.channel.leave();
-    if(global.getsong)
+    msg.member.voiceChannel.leave();
+    if(this.client.getsong)
     {
-        clearInterval(global.getsong)
+        clearInterval(this.client.getsong)
+        this.client.getsong = null
         this.client.user.setActivity(`with responsibility`);
     }
     return
   } 
   serverQueue.songs = [];
-  serverQueue.connection.dispatcher.end('Stop command has been used!');
+  serverQueue.voiceChannel.leave();
+  queue.delete(guild.id);
+  return;
       
 
     }

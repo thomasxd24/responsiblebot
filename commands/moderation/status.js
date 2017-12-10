@@ -1,4 +1,5 @@
 const permissionRole = "Helper";
+var moment = require('moment');
 const { Command } = require('discord.js-commando');
 module.exports = class StatusCommand extends Command {
     constructor(client) {
@@ -28,6 +29,7 @@ module.exports = class StatusCommand extends Command {
     }
 
     run(message) {
-      message.channel.send("WIP :wink:");
+      message.channel.send(moment("1900-01-01 00:00:00").add(process.uptime(), 'seconds').format("HH:mm:ss"));
+      
     }
 };

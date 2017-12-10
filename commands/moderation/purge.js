@@ -40,8 +40,8 @@ const permissionRole = "Mod";
       }
 
       run(message,{ number }) {
-        let messagecount = parseInt(parseInt(number));
-          message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+        let messagecount = parseInt(number);
+          message.channel.bulkDelete(messagecount,true);
 
 
 

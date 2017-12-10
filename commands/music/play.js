@@ -180,17 +180,21 @@ async function handleVideo(queue, video, msg, voiceChannel, playlist = false, it
 
 async function play(queue,guild, song , skipto = undefined) {
 	var serverQueue = queue.get(guild.id);
+	console.log(serverQueue)
 	if (!song) {
 		if(serverQueue.loopqueue != '')
 		{
-			serverQueue.song = Object.assign([], serverQueue.loopqueue);
+			serverQueue.songs = Object.assign([], serverQueue.loopqueue);
 			song = serverQueue.songs[0]
 			
 		}
-
+		else
+		{
 			serverQueue.voiceChannel.leave();
 			queue.delete(guild.id);
 			return;
+		}
+			
 
 		
 	}

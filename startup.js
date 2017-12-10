@@ -10,7 +10,6 @@ const punishlevel = new discord.Collection();
 const express = require('express');
 const app = express();
 const http = require('http');
-global.getsong = null
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -35,14 +34,16 @@ app.listen(port, () => {
 setInterval(() => {
   http.get('http://littlebrother-discord.herokuapp.com');
 }, 900000);
-global.stockfish = require("stockfish");
+
 console.log(global.stockfish);
 global.afk = new discord.Collection();
 const client = new commando.Client({
 	owner: ['186824408227119104','325644122063110156'],
-	commandPrefix: '/'
+	commandPrefix: '.'
 });
 client.queue = new discord.Collection();
+client.getsong = null
+client.stockfish = require("stockfish");
 client
 	.on('error', console.error)
 	.on('warn', console.warn)

@@ -7,7 +7,14 @@ module.exports = class UnmuteCommand extends Command {
             group: 'moderation',
             memberName: 'unmute',
             description: 'Unmute someone.',
-            examples: ['/unmute [mention]']
+            examples: ['/unmute [mention]'],
+            args: [
+              {
+                  key: 'member',
+                  prompt: 'Who are you unmuting?',
+                  type: 'member'
+              }
+          ]
         });
     }
 
@@ -28,6 +35,7 @@ module.exports = class UnmuteCommand extends Command {
     }
 
     run(message) {
-      message.channel.send("WIP :wink:");
+      member.removeRole(message.guild.roles.find("name", "Muted")).catch(console.error);
+      message.channel.send("You're unmuted.");
     }
 };

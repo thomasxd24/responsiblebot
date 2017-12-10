@@ -1,4 +1,7 @@
+
+
 const { Command } = require('discord.js-commando');
+const { MessageAttachment } = require('discord.js');
 var Chess = require('chess.js').Chess;
 var chesses = {};
 var stockfishes = {};
@@ -82,7 +85,7 @@ var SIDENAMES = {w:'Black', b:'White'};
             chesses[id] = new Chess();
             console.log('Chess game: ', message.author.username + ' vs ResponsibleBot');
             thinking[id] = false;
-            stockfishes[id] = global.stockfish();
+            stockfishes[id] = this.client.stockfish();
             stockfishes[id].postMessage('setoption name Contempt value 30');
             stockfishes[id].postMessage('setoption name Skill Level value 0');
             stockfishes[id].postMessage('ucinewgame');
@@ -101,14 +104,16 @@ var SIDENAMES = {w:'Black', b:'White'};
                       console.log(lastmsg[id]);
                       lastmsg[id].delete().catch(O_o=>{});
                     }
-
-                    message.reply("Your Turn!", {
-                      file: get_fen_img(id) }).then(function(message) {
+                    var url = get_fen_img(id);
+                    message.channel.send(new MessageAttachment(url))
+                      .then(function(message) {
         lastmsg[id] = message});
+        message.reply("Your Turn!")
                     thinking[id] = false;
                     if(chesses[id].game_over()) {
                         end_game(id, false, false);
                     }
+                
                 }
             }
         }

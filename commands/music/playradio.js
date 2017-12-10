@@ -44,7 +44,7 @@ module.exports = class PlayRadioCommand extends Command {
                 })
             })
             .catch(console.error);
-            global.getsong = setInterval(() => {
+            this.client.getsong = setInterval(() => {
                 request("http://api.truckers.fm/lastplayed/1",function (error, response, body) {
                     userclient.setActivity(JSON.parse(body)[0].song + ' - ' + JSON.parse(body)[0].artist,{type: "LISTENING"})
 
