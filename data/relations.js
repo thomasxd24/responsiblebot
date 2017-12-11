@@ -8,7 +8,7 @@ exports.run = async (bot, message, args) => {
         return "Cat Owner";
         break;
       case "dog":
-        return "Dog Owner";
+        return "Owner";
         break;
       case "dad":
         return "Mum";

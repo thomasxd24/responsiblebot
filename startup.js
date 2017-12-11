@@ -44,6 +44,8 @@ const client = new commando.Client({
 client.queue = new discord.Collection();
 client.getsong = null
 client.stockfish = require("stockfish");
+client.relation = new discord.Collection();
+client.relationRequest = new discord.Collection();
 client
 	.on('error', console.error)
 	.on('warn', console.warn)
