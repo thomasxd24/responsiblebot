@@ -39,7 +39,7 @@ console.log(global.stockfish);
 global.afk = new discord.Collection();
 const client = new commando.Client({
 	owner: ['186824408227119104','325644122063110156'],
-	commandPrefix: '.'
+	commandPrefix: '/'
 });
 client.queue = new discord.Collection();
 client.getsong = null
