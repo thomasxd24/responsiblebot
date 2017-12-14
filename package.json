@@ -35,7 +35,7 @@
     "stockfish": "^8.0.0",
     "superagent": "^3.8.1",
     "uws": "^9.14.0",
-    "ytdl-core": "^0.18.2",
+    "ytdl-core": "github:fent/node-ytdl-core",
     "zlib-sync": "^0.1.3"
   }
 }
